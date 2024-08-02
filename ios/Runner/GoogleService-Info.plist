@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>856554675737-62comt6g3mp2mnblrb236lvr518av3gu.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyANpD2oGTUh-pIfEtM7r11d6Ik1BWMpcwQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>856554675737</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.carr.carrot</string>
+	<key>PROJECT_ID</key>
+	<string>russian-carrot</string>
+	<key>STORAGE_BUCKET</key>
+	<string>russian-carrot.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:856554675737:ios:3d9959f8f0d73501f5d488</string>
+</dict>
+</plist>

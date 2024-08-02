@@ -1,0 +1,37 @@
+{
+  "project_info": {
+    "project_number": "856554675737",
+    "project_id": "russian-carrot",
+    "storage_bucket": "russian-carrot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856554675737:android:06438bd0e1838d75f5d488",
+        "android_client_info": {
+          "package_name": "com.carr.carrot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDP0BurHviBnmNg51K6lEHVqa9sNoL1YwY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "856554675737-risi6hgid58c06h4pqap6tqs1vvu7u2t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.carr.russsia_carrot"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
