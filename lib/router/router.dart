@@ -2,6 +2,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:russsia_carrot/data/local/Pref.dart';
 import 'package:russsia_carrot/data/model/products_model.dart';
+import 'package:russsia_carrot/features/bloc_profile/profile_bloc.dart';
 import 'package:russsia_carrot/ui/auth/auth_page.dart';
 import 'package:russsia_carrot/ui/auth/confirm_page.dart';
 import 'package:russsia_carrot/ui/auth/main_auth_page.dart';
@@ -9,6 +10,7 @@ import 'package:russsia_carrot/ui/auth/register_page.dart';
 import 'package:russsia_carrot/ui/main/all_product/all_product_owner_page.dart';
 import 'package:russsia_carrot/ui/main/notification/detail_notification_page.dart';
 import 'package:russsia_carrot/ui/profile/help.dart';
+import 'package:russsia_carrot/ui/profile/profile_edit.dart';
 import 'package:russsia_carrot/ui/profile/seller_profile_page.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -47,6 +49,7 @@ class AppRouter extends _$AppRouter {
 
         ///Seller Profile
         AutoRoute(page: SellerProfileRoute.page),
+          AutoRoute(page: ProfileEditRoute.page),
 
         ///Bottom Navigation
         AutoRoute(page: BottomNavRoute.page, initial: !startAuth, children: [

@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:event_bus/event_bus.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:russsia_carrot/data/event_bus.dart';
 import 'package:russsia_carrot/features/bloc_category/category_product_bloc.dart';
 import 'package:russsia_carrot/features/bloc_location/city_bloc.dart';
@@ -59,8 +58,8 @@ class _MainPageState extends State<MainPage> {
   bool showPaginationProducts = true;
   String searchText = '';
   final eventBus = GetIt.I<EventBus>();
-  final _blocCity = CityBloc(GetIt.I<AbstractRepository>());
-  String _city = 'Загрузка...';
+  // final _blocCity = CityBloc(GetIt.I<AbstractRepository>());
+  // String _city = 'Загрузка...';
 
   @override
   void initState() {
@@ -71,7 +70,7 @@ class _MainPageState extends State<MainPage> {
         selectedPage = _pageController.page?.round() ?? 0;
       });
     });
-    _getCurrentLocation();
+    // _getCurrentLocation();
     token = context.read<SaveTokenCubit>().state.token;
     debugPrint(token);
     pagination();
@@ -87,40 +86,40 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  Future<void> _getCurrentLocation() async {
-    bool serviceEnabled;
-    LocationPermission permission;
+  // Future<void> _getCurrentLocation() async {
+  //   bool serviceEnabled;
+  //   LocationPermission permission;
 
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      setState(() {
-        _city = 'Геолокация отключена';
-      });
-      return;
-    }
+  //   serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  //   if (!serviceEnabled) {
+  //     setState(() {
+  //       _city = 'Геолокация отключена';
+  //     });
+  //     return;
+  //   }
 
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        setState(() {
-          _city = 'Разрешение на геолокацию отклонено';
-        });
-        return;
-      }
-    }
+  //   permission = await Geolocator.checkPermission();
+  //   if (permission == LocationPermission.denied) {
+  //     permission = await Geolocator.requestPermission();
+  //     if (permission == LocationPermission.denied) {
+  //       setState(() {
+  //         _city = 'Разрешение на геолокацию отклонено';
+  //       });
+  //       return;
+  //     }
+  //   }
 
-    if (permission == LocationPermission.deniedForever) {
-      setState(() {
-        _city = 'Разрешение на геолокацию отклонено навсегда';
-      });
-      return;
-    }
+  //   if (permission == LocationPermission.deniedForever) {
+  //     setState(() {
+  //       _city = 'Разрешение на геолокацию отклонено навсегда';
+  //     });
+  //     return;
+  //   }
 
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    _blocCity.add(FetchCity(position));
-  }
+  //   Position position = await Geolocator.getCurrentPosition(
+  //       desiredAccuracy: LocationAccuracy.high);
+  //   _blocCity.add(FetchCity(position));
+  // }
 
   void loadAdvert() {
     _blocAdvert.add(LoadAdvertisementsEvent(limit: limitAdvert.value));
@@ -212,10 +211,7 @@ class _MainPageState extends State<MainPage> {
                                   children: [
                                     ///Location
                                     const SizedBox(height: 16),
-                                    BlocBuilder<CityBloc, CityState>(
-                                      bloc: _blocCity,
-                                      builder: (context, state) {
-                                        return Row(
+                                    Row(
                                           children: [
                                             // const SizedBox(width: 24),
                                             // Container(
@@ -236,36 +232,36 @@ class _MainPageState extends State<MainPage> {
                                             //   'Ваш город: ',
                                             //   style: TextStyle(fontSize: 12),
                                             // ),
-                                            if (state is CityLoaded)
-                                              Text(
-                                                state.city,
-                                                style: const TextStyle(
-                                                    fontSize: 12,
-                                                    decoration: TextDecoration
-                                                        .underline,
-                                                    decorationColor:
-                                                        Colors.white),
-                                              ),
-                                            if (state is CityError)
-                                              Text(
-                                                state.errorMessage,
-                                                style: const TextStyle(
-                                                    fontSize: 12,
-                                                    decoration: TextDecoration
-                                                        .underline,
-                                                    decorationColor:
-                                                        Colors.white),
-                                              ),
-                                            if (state is CityLoading)
-                                              Text(
-                                                _city,
-                                                style: const TextStyle(
-                                                    fontSize: 12,
-                                                    decoration: TextDecoration
-                                                        .underline,
-                                                    decorationColor:
-                                                        Colors.white),
-                                              ),
+                                            // if (state is CityLoaded)
+                                            //   Text(
+                                            //     state.city,
+                                            //     style: const TextStyle(
+                                            //         fontSize: 12,
+                                            //         decoration: TextDecoration
+                                            //             .underline,
+                                            //         decorationColor:
+                                            //             Colors.white),
+                                            //   ),
+                                            // if (state is CityError)
+                                            //   Text(
+                                            //     state.errorMessage,
+                                            //     style: const TextStyle(
+                                            //         fontSize: 12,
+                                            //         decoration: TextDecoration
+                                            //             .underline,
+                                            //         decorationColor:
+                                            //             Colors.white),
+                                            //   ),
+                                            // if (state is CityLoading)
+                                            //   Text(
+                                            //     _city,
+                                            //     style: const TextStyle(
+                                            //         fontSize: 12,
+                                            //         decoration: TextDecoration
+                                            //             .underline,
+                                            //         decorationColor:
+                                            //             Colors.white),
+                                            //   ),
                                             const Spacer(),
                                             GestureDetector(
                                                 onTap: () {
@@ -296,8 +292,6 @@ class _MainPageState extends State<MainPage> {
                                                     Assets.iconsNotifications)),
                                             const SizedBox(width: 30),
                                           ],
-                                        );
-                                      },
                                     ),
                                     const SizedBox(height: 16),
 

@@ -1,6 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -8,7 +9,6 @@ import '../../../generated/assets.dart';
 
 @RoutePage()
 class HelpPage extends StatefulWidget {
-
   @override
   State<HelpPage> createState() => _HelpPageState();
 }
@@ -52,15 +52,23 @@ class _HelpPageState extends State<HelpPage> {
                 throw 'Could not launch $url';
               }
             },
+            onLongPress: () async {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Скопировано')),
+              );
+              await Clipboard.setData(
+                  ClipboardData(text: 'rumorkovka.kr@gmail.com'));
+            },
             child: Container(
               alignment: Alignment.center,
               margin: EdgeInsets.all(20),
               color: Colors.black.withOpacity(0),
-              child: RichText(textAlign: TextAlign.center,
+              child: RichText(
+                textAlign: TextAlign.center,
                 text: const TextSpan(children: [
                   TextSpan(
                       text:
-                          'По всем вопросам связанным с работой приложения пишите на почту: '),
+                          'По всем вопросам работы приложения, а так же удаления аккаунта и всех данных пишите на почту: '),
                   TextSpan(
                       text: 'rumorkovka.kr@gmail.com',
                       style: TextStyle(color: Colors.blueAccent))

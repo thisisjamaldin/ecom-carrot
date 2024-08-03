@@ -37,14 +37,14 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationAlwaysUsageDescription</key>
+	<!-- <key>NSLocationAlwaysUsageDescription</key>
 	<string>Ваше приложение требует доступ к вашему местоположению даже когда оно не активно для предоставления полной функциональности.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Ваше приложение требует доступ к вашему местоположению для предоставления персонализированных услуг.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Ваше приложение требует доступ к вашему местоположению для предоставления персонализированных услуг.</string>
+	<string>Ваше приложение требует доступ к вашему местоположению для предоставления персонализированных услуг.</string> -->
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>The photo library permission is needed to upload a workout image.</string>
+	<string>Ваши фотографии будут использоваться для добавления изображений в объявления, которые вы создаете в приложении.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>

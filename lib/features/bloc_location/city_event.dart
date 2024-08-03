@@ -1,15 +1,15 @@
-part of 'city_bloc.dart';
+// part of 'city_bloc.dart';
 
-abstract class CityEvent extends Equatable {
-  @override
-  List<Object> get props => [];
-}
+// abstract class CityEvent extends Equatable {
+//   @override
+//   List<Object> get props => [];
+// }
 
-class FetchCity extends CityEvent {
-  final Position position;
+// class FetchCity extends CityEvent {
+//   final Position position;
 
-  FetchCity(this.position);
+//   FetchCity(this.position);
 
-  @override
-  List<Object> get props => [position];
-}
+//   @override
+//   List<Object> get props => [position];
+// }

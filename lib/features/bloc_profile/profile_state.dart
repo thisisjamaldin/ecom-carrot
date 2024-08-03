@@ -21,6 +21,11 @@ final class LoadedProfileState extends ProfileState {
 
   @override
   List<Object?> get props => [owner];
+
+  @override
+  bool operator ==(Object other) => false;
+  @override
+  int get hashCode => super.hashCode;
 }
 
 final class ErrorProfileState extends ProfileState {

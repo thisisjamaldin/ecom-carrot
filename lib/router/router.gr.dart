@@ -144,6 +144,15 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const ProfilePage(),
       );
     },
+    ProfileEditRoute.name: (routeData) {
+      final args = routeData.argsAs<ProfileEditRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ProfileEditPage(
+          blocProfile: args.bloc,
+        ),
+      );
+    },
     RecoverPasswordRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -506,8 +515,7 @@ class HelpRoute extends PageRouteInfo<void> {
 
   static const String name = 'HelpRoute';
 
-  static const PageInfo<void> page =
-      PageInfo<void>(name);
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -548,6 +556,19 @@ class PhotoDetailRouteArgs {
   }
 }
 
+class ProfileEditRouteArgs {
+  const ProfileEditRouteArgs({
+    required this.bloc,
+  });
+
+  final ProfileBloc bloc;
+
+  @override
+  String toString() {
+    return 'ProfileEditRouteArgs{photos: $bloc}';
+  }
+}
+
 /// generated route for
 /// [ProfilePage]
 class ProfileRoute extends PageRouteInfo<void> {
@@ -560,6 +581,24 @@ class ProfileRoute extends PageRouteInfo<void> {
   static const String name = 'ProfileRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ProfileEditPage]
+class ProfileEditRoute extends PageRouteInfo<ProfileEditRouteArgs> {
+  ProfileEditRoute({List<PageRouteInfo>? children, required ProfileBloc bloc})
+      : super(
+          ProfileEditRoute.name,
+          args: ProfileEditRouteArgs(
+            bloc: bloc,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ProfileEditRoute';
+
+  static const PageInfo<ProfileEditRouteArgs> page =
+      PageInfo<ProfileEditRouteArgs>(name);
 }
 
 /// generated route for

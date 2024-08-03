@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:russsia_carrot/data/model/favorites_model.dart';
 import 'package:russsia_carrot/data/model/notification_model.dart';
@@ -56,7 +55,7 @@ abstract class AbstractRepository {
 
   Future<void> deleteProducts(String token, int id);
 
-  Future<String> getCityName(Position position);
+  // Future<String> getCityName(Position position);
 
   Future<ProductsModel> fetchSearchProduct(String token, String searchText);
 
@@ -95,4 +94,9 @@ abstract class AbstractRepository {
   Future<void> uploadMessageImage(String token, String uuid, XFile image);
   Future<void> sendReport(String token, String header, String name,
       String email, String phone, String content);
+
+  Future<String> editProfile(String token, String email, String first_name,
+      String phone, XFile? image);
+  Future<String> changePassword(String token, String current, String newPassword,
+      String repeatCurrentPassword);
 }

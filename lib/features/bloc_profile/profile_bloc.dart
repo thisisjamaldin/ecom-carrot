@@ -19,9 +19,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     try {
-      if (state is! LoadedProfileState) {
-        emit(LoadingProfileState());
-      }
+      // if (state is! LoadedProfileState) {
+      //   emit(LoadingProfileState());
+      // }
       Owner owner = await repository.fetchProfile(event.token);
       emit(LoadedProfileState(owner: owner));
     } catch (e) {

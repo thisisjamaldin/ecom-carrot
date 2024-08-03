@@ -67,24 +67,27 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
         actions: [
-          Container(
-            margin: const EdgeInsets.only(top: 6, right: 16),
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-            decoration: BoxDecoration(
-                color: const Color(0xff3F3D45),
-                borderRadius: BorderRadius.circular(20)),
-            child: Row(
-              children: [
-                SvgPicture.asset(Assets.iconsPencil),
-                const SizedBox(width: 6),
-                const Text(
-                  'Редактировать профиль',
-                  style: TextStyle(
-                    fontSize: 8,
-                    color: ColorRes.orange,
-                  ),
-                )
-              ],
+          GestureDetector(
+            onTap: () => AutoRouter.of(context).push(ProfileEditRoute(bloc: _blocProfile)),
+            child: Container(
+              margin: const EdgeInsets.only(top: 6, right: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                  color: const Color(0xff3F3D45),
+                  borderRadius: BorderRadius.circular(20)),
+              child: Row(
+                children: [
+                  SvgPicture.asset(Assets.iconsPencil),
+                  const SizedBox(width: 6),
+                  const Text(
+                    'Редактировать профиль',
+                    style: TextStyle(
+                      fontSize: 8,
+                      color: ColorRes.orange,
+                    ),
+                  )
+                ],
+              ),
             ),
           )
         ],
@@ -109,12 +112,15 @@ class _ProfilePageState extends State<ProfilePage> {
                         borderRadius: BorderRadius.circular(10)),
                     child: Row(
                       children: [
-                        SizedBox(
-                          width: 60,
-                          height: 60,
-                          child: state.owner.image.isEmpty
-                              ? Image.asset(Assets.imagesPerson)
-                              : Image.network(state.owner.image),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: SizedBox(
+                            width: 60,
+                            height: 60,
+                            child: state.owner.image.isEmpty
+                                ? Image.asset(Assets.imagesPerson)
+                                : Image.network(state.owner.image),
+                          ),
                         ),
                         const SizedBox(width: 12),
                         Column(
@@ -160,24 +166,24 @@ class _ProfilePageState extends State<ProfilePage> {
                                       )
                                     ],
                                   ),
-                                  Row(
-                                    children: [
-                                      const Text(
-                                        'Сделок завершено ',
-                                        style: TextStyle(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                      Text(
-                                        state.owner.completedTransactions
-                                            .toString(),
-                                        style: const TextStyle(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w700,
-                                            color: ColorRes.orange),
-                                      )
-                                    ],
-                                  )
+                                  // Row(
+                                  //   children: [
+                                  //     const Text(
+                                  //       'Сделок завершено ',
+                                  //       style: TextStyle(
+                                  //           fontSize: 10,
+                                  //           fontWeight: FontWeight.w700),
+                                  //     ),
+                                  //     Text(
+                                  //       state.owner.completedTransactions
+                                  //           .toString(),
+                                  //       style: const TextStyle(
+                                  //           fontSize: 10,
+                                  //           fontWeight: FontWeight.w700,
+                                  //           color: ColorRes.orange),
+                                  //     )
+                                  //   ],
+                                  // )
                                 ],
                               ),
                             )

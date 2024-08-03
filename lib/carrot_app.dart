@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get_it/get_it.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:russsia_carrot/features/bloc_chat/chat_bloc.dart';
@@ -35,24 +34,23 @@ class _CarrotAppState extends State<CarrotApp> {
   final repository = GetIt.I<AbstractRepository>();
   // NotificationService service = NotificationService();
 
-  Position? _currentPosition;
 
-  Future<void> _getCurrentLocation() async {
-    final permission = await Permission.location.request();
-    if (permission.isGranted) {
-      try {
-        _currentPosition = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high,
-        );
-        setState(() {});
-      } catch (e) {
-        print(e);
-      }
-    } else if (permission.isDenied || permission.isPermanentlyDenied) {
-      // Пользователь отклонил или навсегда отклонил запрос на разрешение
-      _showPermissionDeniedDialog();
-    }
-  }
+  // Future<void> _getCurrentLocation() async {
+  //   final permission = await Permission.location.request();
+  //   if (permission.isGranted) {
+  //     try {
+  //       _currentPosition = await Geolocator.getCurrentPosition(
+  //         desiredAccuracy: LocationAccuracy.high,
+  //       );
+  //       setState(() {});
+  //     } catch (e) {
+  //       print(e);
+  //     }
+  //   } else if (permission.isDenied || permission.isPermanentlyDenied) {
+  //     // Пользователь отклонил или навсегда отклонил запрос на разрешение
+  //     _showPermissionDeniedDialog();
+  //   }
+  // }
 
   void _showPermissionDeniedDialog() {
     showDialog(
@@ -78,9 +76,9 @@ class _CarrotAppState extends State<CarrotApp> {
 
   @override
   void initState() {
-    if (_currentPosition == null) {
-      _getCurrentLocation();
-    }
+    // if (_currentPosition == null) {
+    //   _getCurrentLocation();
+    // }
     _handleIncomingLinks();
     // WidgetsFlutterBinding.ensureInitialized();
     // PushNotificationService().init();

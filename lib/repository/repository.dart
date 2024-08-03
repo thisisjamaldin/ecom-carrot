@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:geolocator_platform_interface/src/models/position.dart';
+// import 'package:geolocator_platform_interface/src/models/position.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:russsia_carrot/data/local/pref.dart';
 import 'package:russsia_carrot/data/model/advertisements_model.dart';
@@ -13,7 +12,7 @@ import 'package:russsia_carrot/data/model/reviews_model.dart';
 import 'package:russsia_carrot/repository/abstract_repository.dart';
 import 'package:russsia_carrot/utils/key.dart';
 import 'package:dio/dio.dart';
-
+import 'package:http/http.dart' as http;
 import '../data/model/categories_model.dart';
 import '../data/model/chat.dart';
 import '../ext.dart';
@@ -162,7 +161,6 @@ class Repository extends AbstractRepository {
 
   Future<void> addPhoto(String token, String id, File photo) async {
     // String fileName =photos.path.split('/').last;
-
     final imageBytes = await photo.readAsBytes();
     MultipartFile file = MultipartFile.fromBytes(
       imageBytes,
@@ -398,6 +396,7 @@ class Repository extends AbstractRepository {
         },
       ),
     );
+    print('--re22:${response}');
     Map<String, dynamic> data = json.decode(response.toString());
     Owner owner = Owner.fromJson(data);
     Pref().saveId(owner.id);
@@ -467,32 +466,32 @@ class Repository extends AbstractRepository {
     print(response.statusCode);
   }
 
-  @override
-  Future<String> getCityName(Position position) async {
-    final response = await dio.get(
-      'https://nominatim.openstreetmap.org/reverse',
-      queryParameters: {
-        'lat': position.latitude,
-        'lon': position.longitude,
-        'format': 'json',
-      },
-    );
+  // @override
+  // Future<String> getCityName(Position position) async {
+  //   final response = await dio.get(
+  //     'https://nominatim.openstreetmap.org/reverse',
+  //     queryParameters: {
+  //       'lat': position.latitude,
+  //       'lon': position.longitude,
+  //       'format': 'json',
+  //     },
+  //   );
 
-    if (response.statusCode == 200) {
-      final data = json.decode(response.toString());
-      final address = data['address'];
+  //   if (response.statusCode == 200) {
+  //     final data = json.decode(response.toString());
+  //     final address = data['address'];
 
-      if (address != null && address['city'] != null) {
-        return address['city'];
-      } else if (address['village'] != null) {
-        return address['village'];
-      } else {
-        return 'Город не найден';
-      }
-    } else {
-      throw Exception('Ошибка при получении города');
-    }
-  }
+  //     if (address != null && address['city'] != null) {
+  //       return address['city'];
+  //     } else if (address['village'] != null) {
+  //       return address['village'];
+  //     } else {
+  //       return 'Город не найден';
+  //     }
+  //   } else {
+  //     throw Exception('Ошибка при получении города');
+  //   }
+  // }
 
   @override
   Future<ChatRoomModel> getRoom(String token, bool buy) async {
@@ -626,5 +625,65 @@ class Repository extends AbstractRepository {
     );
     print('---re:${res}');
     return;
+  }
+
+  @override
+  Future<String> editProfile(String token, String email, String first_name,
+      String phone, XFile? image) async {
+    var uri = Uri.parse('${baseUrl}accounts/profile/');
+    // var request = http.MultipartRequest("POST", uri);
+    // request.headers.addAll({
+    //   'Content-Type': 'multipart/form-data',
+    //   'Authorization':
+    //       'Bearer ${MString.token}',
+    // });
+    var request = http.MultipartRequest('PATCH', uri);
+    request.headers.addAll({
+      'Content-Type': 'application/json',
+      'Authorization': 'Token ${token}',
+    });
+    if (image != null) {
+      request.files.add(await http.MultipartFile.fromPath('image', image.path));
+    }
+    request.fields['email'] = email;
+    request.fields['first_name'] = first_name;
+    request.fields['phone'] = phone;
+    print('---re${request}');
+    print('---re${request.fields}');
+    print('---re${request.headers}');
+    print('---re${request.url}');
+    var response = await request.send();
+    var responseBody = await response.stream.bytesToString();
+    print('Response Body: $responseBody');
+    if (response.statusCode == 200) {
+      print('Uploaded!');
+    } else {
+      print('Upload failed.');
+      return '$responseBody';
+    }
+    return '';
+  }
+
+  @override
+  Future<String> changePassword(String token, String current,
+      String newPassword, String repeatCurrentPassword) async {
+    print('---re:${baseUrl}accounts/change-password/');
+    var res = await http.post(
+      Uri.parse('${baseUrl}accounts/change-password/'),
+      body: jsonEncode({
+        "old_password": current,
+        "password": newPassword,
+        "password_confirm": repeatCurrentPassword
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token $token',
+      },
+    );
+    if (res.statusCode == 200 || res.statusCode == 201) {
+      return '';
+    } else {
+      return utf8.decode(res.bodyBytes);
+    }
   }
 }

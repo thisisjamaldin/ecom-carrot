@@ -14,6 +14,7 @@ class CarrotRoute {
   static const messagePage = '/carrot/messagePage';
   static const messageDetailPage = '/carrot/messageDetailPage';
   static const profilePage = '/carrot/profilePage';
+  static const profileEditPage = '/carrot/profileEditPage';
   static const sellerProfilePage = '/carrot/sellerProfilePage';
   static const allReviewsPage = '/carrot/allReviewsPage';
   static const writeReviewsPage = '/carrot/writeReviewsPage';

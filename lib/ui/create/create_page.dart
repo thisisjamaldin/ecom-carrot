@@ -62,9 +62,15 @@ class _CreatePageState extends State<CreatePage> {
         _controllerDesc.text.isNotEmpty &&
         _image.value.isNotEmpty &&
         _controllerAddress.text.isNotEmpty &&
-        (context.read<SaveNameCubit>().state.name.isEmpty ? _controllerName.text.isNotEmpty :context.read<SaveNameCubit>().state.name.isNotEmpty) &&
-        (context.read<SaveEamailCubit>().state.email.isEmpty ? _controllerEmail.text.isNotEmpty :context.read<SaveEamailCubit>().state.email.isNotEmpty) &&
-        (context.read<SaveNumberCubit>().state.number.isEmpty ? _controllerPhone.text.isNotEmpty :context.read<SaveNumberCubit>().state.number.isNotEmpty );
+        (context.read<SaveNameCubit>().state.name.isEmpty
+            ? _controllerName.text.isNotEmpty
+            : context.read<SaveNameCubit>().state.name.isNotEmpty) &&
+        (context.read<SaveEamailCubit>().state.email.isEmpty
+            ? _controllerEmail.text.isNotEmpty
+            : context.read<SaveEamailCubit>().state.email.isNotEmpty) &&
+        (context.read<SaveNumberCubit>().state.number.isEmpty
+            ? _controllerPhone.text.isNotEmpty
+            : context.read<SaveNumberCubit>().state.number.isNotEmpty);
   }
 
   Future<void> _pickImages() async {
@@ -87,10 +93,15 @@ class _CreatePageState extends State<CreatePage> {
         _controllerPrice.text.isNotEmpty &&
         _controllerDesc.text.isNotEmpty &&
         _controllerAddress.text.isNotEmpty &&
-        (context.read<SaveNameCubit>().state.name.isEmpty ? _controllerName.text.isNotEmpty :context.read<SaveNameCubit>().state.name.isNotEmpty) &&
-        (context.read<SaveEamailCubit>().state.email.isEmpty ? _controllerEmail.text.isNotEmpty :context.read<SaveEamailCubit>().state.email.isNotEmpty) &&
-        (context.read<SaveNumberCubit>().state.number.isEmpty ? _controllerPhone.text.isNotEmpty :context.read<SaveNumberCubit>().state.number.isNotEmpty )) {
-
+        (context.read<SaveNameCubit>().state.name.isEmpty
+            ? _controllerName.text.isNotEmpty
+            : context.read<SaveNameCubit>().state.name.isNotEmpty) &&
+        (context.read<SaveEamailCubit>().state.email.isEmpty
+            ? _controllerEmail.text.isNotEmpty
+            : context.read<SaveEamailCubit>().state.email.isNotEmpty) &&
+        (context.read<SaveNumberCubit>().state.number.isEmpty
+            ? _controllerPhone.text.isNotEmpty
+            : context.read<SaveNumberCubit>().state.number.isNotEmpty)) {
       isNotPusto.value = true;
     }
   }
@@ -104,15 +115,13 @@ class _CreatePageState extends State<CreatePage> {
         Navigator.of(context).pop();
         AutoRouter.of(context)
             .replaceAll([const MainRoute(), const MainAuthRoute()]);
-      }else{
+      } else {
         eventBus.on<UpdateCreate>().listen((event) {
           loadData();
         });
         loadData();
       }
-
     });
-
   }
 
   void loadData() {
@@ -442,62 +451,58 @@ class _CreatePageState extends State<CreatePage> {
                             color: Colors.white),
                       ),
                       const SizedBox(height: 16),
-                      GestureDetector(
-                        onTap: () {
-                          //TODO:Реализовать определение место положения
+                      TextField(
+                        controller: _controllerAddress,
+                        onChanged: (value) {
+                          checkTextField();
                         },
-                        child: TextField(
-                          controller: _controllerAddress,
-                          onChanged: (value) {
-                            checkTextField();
-                          },
-                          decoration: InputDecoration(
-                              filled: true,
-                              fillColor: ColorRes.grey,
-                              border: const OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5.0)),
-                                borderSide: BorderSide.none,
-                              ),
-                              hintText: "Ваше местоположение",
-                              hintStyle:
-                                  const TextStyle(color: ColorRes.greyHint),
-                              prefixIcon: IconButton(
-                                  onPressed: () {},
-                                  icon: SvgPicture.asset(Assets.iconsLocation)),
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 12, horizontal: 17)),
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400),
-                        ),
+                        decoration: InputDecoration(
+                            filled: true,
+                            fillColor: ColorRes.grey,
+                            border: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5.0)),
+                              borderSide: BorderSide.none,
+                            ),
+                            hintText: "Ваш город",
+                            hintStyle:
+                                const TextStyle(color: ColorRes.greyHint),
+                            prefixIcon: IconButton(
+                                onPressed: () {},
+                                icon: SvgPicture.asset(Assets.iconsLocation)),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 12, horizontal: 17)),
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400),
                       ),
                       const SizedBox(height: 14),
-                      Row(
-                        children: [
-                          SvgPicture.asset(Assets.iconsGeoPosition),
-                          const SizedBox(width: 7),
-                          const Expanded(
-                            child: AutoSizeText(
-                              "Ваше местоположение будет определено автоматически. Если данные неверны, введите их вручную.",
-                              maxLines: 2,
-                              minFontSize: 10,
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white),
-                            ),
-                          )
-                        ],
-                      ),
+                      // Row(
+                      //   children: [
+                      //     SvgPicture.asset(Assets.iconsGeoPosition),
+                      //     const SizedBox(width: 7),
+                      //     const Expanded(
+                      //       child: AutoSizeText(
+                      //         "Ваше местоположение будет определено автоматически. Если данные неверны, введите их вручную.",
+                      //         maxLines: 2,
+                      //         minFontSize: 10,
+                      //         style: TextStyle(
+                      //             fontSize: 10,
+                      //             fontWeight: FontWeight.w400,
+                      //             color: Colors.white),
+                      //       ),
+                      //     )
+                      //   ],
+                      // ),
                       const SizedBox(height: 23),
                       Visibility(
-                        visible: context.read<SaveNameCubit>().state.name.isEmpty,
+                        visible:
+                            context.read<SaveNameCubit>().state.name.isEmpty,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                        requiredText("Ваше имя"),
+                            requiredText("Ваше имя"),
                             const SizedBox(height: 10),
                             TextField(
                               onChanged: (value) {
@@ -509,7 +514,7 @@ class _CreatePageState extends State<CreatePage> {
                                   fillColor: ColorRes.grey,
                                   border: OutlineInputBorder(
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(5.0)),
+                                        BorderRadius.all(Radius.circular(5.0)),
                                     borderSide: BorderSide.none,
                                   ),
                                   contentPadding: EdgeInsets.symmetric(
@@ -525,7 +530,8 @@ class _CreatePageState extends State<CreatePage> {
                       ),
 
                       Visibility(
-                        visible: context.read<SaveEamailCubit>().state.email.isEmpty,
+                        visible:
+                            context.read<SaveEamailCubit>().state.email.isEmpty,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -541,7 +547,7 @@ class _CreatePageState extends State<CreatePage> {
                                   fillColor: ColorRes.grey,
                                   border: OutlineInputBorder(
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(5.0)),
+                                        BorderRadius.all(Radius.circular(5.0)),
                                     borderSide: BorderSide.none,
                                   ),
                                   contentPadding: EdgeInsets.symmetric(
@@ -557,34 +563,37 @@ class _CreatePageState extends State<CreatePage> {
                       ),
 
                       Visibility(
-                        visible: context.read<SaveNumberCubit>().state.number.isEmpty,
+                        visible: context
+                            .read<SaveNumberCubit>()
+                            .state
+                            .number
+                            .isEmpty,
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            requiredText("Телефон"),
-
-                        const SizedBox(height: 10),
-                        TextField(
-                          onChanged: (value) {
-                            checkTextField();
-                          },
-                          controller: _controllerPhone,
-                          decoration: const InputDecoration(
-                              filled: true,
-                              fillColor: ColorRes.grey,
-                              border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5.0)),
-                                borderSide: BorderSide.none,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              requiredText("Телефон"),
+                              const SizedBox(height: 10),
+                              TextField(
+                                onChanged: (value) {
+                                  checkTextField();
+                                },
+                                controller: _controllerPhone,
+                                decoration: const InputDecoration(
+                                    filled: true,
+                                    fillColor: ColorRes.grey,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0)),
+                                      borderSide: BorderSide.none,
+                                    ),
+                                    contentPadding: EdgeInsets.symmetric(
+                                        vertical: 12, horizontal: 17)),
+                                style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400),
                               ),
-                              contentPadding: EdgeInsets.symmetric(
-                                  vertical: 12, horizontal: 17)),
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400),
-                        ),
-                                            ]),
+                            ]),
                       ),
                       const SizedBox(height: 31),
                       BlocBuilder<AddProductsBloc, AddProductsState>(
@@ -608,9 +617,9 @@ class _CreatePageState extends State<CreatePage> {
                               _blocCategory.add(LoadCategoryProductEvent(
                                   limit: limitCategory.value));
                               Navigator.of(context).pop();
-                              AutoRouter.of(context).replaceAll([CreateRoute(),AllProductRoute()]);
+                              AutoRouter.of(context).replaceAll(
+                                  [CreateRoute(), AllProductRoute()]);
                             });
-
                           }
                           if (state is LoadingAddProductsState) {
                             loadingAdd = true;
@@ -626,14 +635,32 @@ class _CreatePageState extends State<CreatePage> {
                           return GestureDetector(
                             onTap: () {
                               if (_updateIsActive()) {
-                                if (context.read<SaveNumberCubit>().state.number.isEmpty) {
-                                  context.read<SaveNumberCubit>().saveNumber(_controllerPhone.text);
+                                if (context
+                                    .read<SaveNumberCubit>()
+                                    .state
+                                    .number
+                                    .isEmpty) {
+                                  context
+                                      .read<SaveNumberCubit>()
+                                      .saveNumber(_controllerPhone.text);
                                 }
-                                if (context.read<SaveNameCubit>().state.name.isEmpty) {
-                                  context.read<SaveNameCubit>().saveNumber(_controllerName.text);
+                                if (context
+                                    .read<SaveNameCubit>()
+                                    .state
+                                    .name
+                                    .isEmpty) {
+                                  context
+                                      .read<SaveNameCubit>()
+                                      .saveNumber(_controllerName.text);
                                 }
-                                if (context.read<SaveEamailCubit>().state.email.isEmpty) {
-                                  context.read<SaveEamailCubit>().saveEmail(_controllerEmail.text);
+                                if (context
+                                    .read<SaveEamailCubit>()
+                                    .state
+                                    .email
+                                    .isEmpty) {
+                                  context
+                                      .read<SaveEamailCubit>()
+                                      .saveEmail(_controllerEmail.text);
                                 }
 
                                 _blocProducts.add(LoadAddProductsEvent(
@@ -642,14 +669,41 @@ class _CreatePageState extends State<CreatePage> {
                                   category: categoryId,
                                   address: _controllerAddress.text,
                                   description: _controllerDesc.text,
-                                  email: context.read<SaveEamailCubit>().state.email.isEmpty ? _controllerEmail.text :context.read<SaveEamailCubit>().state.email,
+                                  email: context
+                                          .read<SaveEamailCubit>()
+                                          .state
+                                          .email
+                                          .isEmpty
+                                      ? _controllerEmail.text
+                                      : context
+                                          .read<SaveEamailCubit>()
+                                          .state
+                                          .email,
                                   firstName: stateProfile.owner.firstName,
                                   ownerEmail: stateProfile.owner.email,
                                   lastName: stateProfile.owner.lastName,
                                   middleName: stateProfile.owner.middleName,
-                                  name:  _controllerNameProduct.text,
-                                  ownerName:context.read<SaveNameCubit>().state.name.isEmpty ? _controllerName.text :context.read<SaveNameCubit>().state.name,
-                                  ownerPhone: context.read<SaveNumberCubit>().state.number.isEmpty ? _controllerPhone.text : context.read<SaveNumberCubit>().state.number,
+                                  name: _controllerNameProduct.text,
+                                  ownerName: context
+                                          .read<SaveNameCubit>()
+                                          .state
+                                          .name
+                                          .isEmpty
+                                      ? _controllerName.text
+                                      : context
+                                          .read<SaveNameCubit>()
+                                          .state
+                                          .name,
+                                  ownerPhone: context
+                                          .read<SaveNumberCubit>()
+                                          .state
+                                          .number
+                                          .isEmpty
+                                      ? _controllerPhone.text
+                                      : context
+                                          .read<SaveNumberCubit>()
+                                          .state
+                                          .number,
                                   phone: stateProfile.owner.phone,
                                   photos: _image.value,
                                 ));
